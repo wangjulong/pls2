@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Analysis;
+use Exception;
 use Yii;
 use common\models\Kjh;
 use common\models\search\KjhSearch;
@@ -174,15 +175,9 @@ class KjhController extends Controller
         $temp = Kjh::find()->limit($num)->orderBy('qh DESC')->all();
         $temp2 = array_reverse($temp);
 
-        $model = $this->numbersFormat($temp2);
-        return $this->render('show', ['model' => $model]);
-    }
-
-    protected function numbersFormat($numbers)
-    {
         $views = array();
         // Step 2 循环数组，组合字符串
-        foreach ($numbers as $number) {
+        foreach ($temp2 as $number) {
             // 字符串头部
             $temp = '<tr>' . '<td>' . $number['qh'] . '</td>';
             // 10个单元格
@@ -203,7 +198,9 @@ class KjhController extends Controller
             $views[$number['qh']] = $temp;
         }
         // 返回数组
-        return $views;
+
+        $model = $views;
+        return $this->render('show', ['model' => $model]);
     }
 
 }
