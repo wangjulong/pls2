@@ -1,5 +1,5 @@
 ### 排列三分析系统结构和实现过程
-* [stepInit](#stepInit): 初始化数据和必须的参数
+* [__construct](#stepInit): 初始化数据和必须的参数
 * [stepKJH](#stepKJH): 整理数据 $entireData,得出结果:跟随表
 * [stepANA](#stepANA): 分析跟随表 完善跟随表的后半部分'Z单百'-->'B整个'
 * [stepZD](#stepZD)
@@ -9,13 +9,17 @@
 * [执行过程](#run)
 
 <span id="stepInit"></span>
-> stepInit 初始化数据和必须的参数
+> __construct: 初始化成员变量
 
-    $entireNum      分析中用到的全部数据的行数
-    $entireData     $entireNum 期的全部 lastest 数据
-    $analysisNum    实际分析的数据行数
-    $chartNum       显示结果的走势图的期数
-    $intervalNum    间隔期数,default=3
+    protected $entireData = [];   // 分析所需要的全部的数据,格式:['0' => ['qh' => 2015289,'bai' => 5,'shi' => 2,'ge' => 9],...]
+    protected $entireNum;         // 数据的行数 用于初始化分析的数据
+    protected $followTable;       // 跟随表
+    protected $analysisNum;       // 分析的期数
+    protected $interval;          // 间隔期数（用于生成跟随表时的计算参数）越大越细致
+
+    $entireNum = 80     分析中用到的全部数据的行数,用于初始化数据
+    $analysisNum = 5    实际分析的数据行数
+    $intervalNum = 3    间隔期数
 
 <span id="stepKJH"></span>
 > stepKJH 整理数据 $entireData,得出结果:跟随表

@@ -150,10 +150,10 @@ class KjhController extends Controller
      * @param $chartNum Analysis 走势图中显示的期数
      * @param $interval Analysis 分析过程中用于计算的间隔期数，越大计算越复杂
      */
-    public function actionAnalysis($entireNum, $analysisNum, $chartNum, $interval = 3)
+    public function actionAnalysis($entireNum, $analysisNum, $interval = 3)
     {
-        $analysis = new Analysis();
-        $analysis->entire($entireNum, $analysisNum, $chartNum, $interval);
+        $analysis = new Analysis($entireNum, $analysisNum, $interval);
+        $analysis->entire();
 
     }
 
