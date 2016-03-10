@@ -32,7 +32,7 @@ abstract class AnalysisModel
         $this->entireData = $this->getEntireData($entireNum);
     }
 
-    public function getEntireData($entireNum)
+    protected function getEntireData($entireNum)
     {
         if ($this->entireData != null) {
             return $this->entireData;
@@ -50,12 +50,12 @@ abstract class AnalysisModel
         return $this->entireData;
     }
 
-    public function getFollowTable()
+    protected function getFollowTable()
     {
         return $this->followTable;
     }
 
-    public function setFollowTable($followTable)
+    protected function setFollowTable($followTable)
     {
         $this->followTable = $followTable;
     }
@@ -73,7 +73,21 @@ abstract class AnalysisModel
     /**
      * @return mixed 设置 $this->followTable
      */
-    public abstract function stepKJH();
+    protected abstract function stepKJH();
 
+
+    /**
+     * 工具方法 根据整体数据,分析的期数,计算出 followTable
+     * @param String $bsg 匹配 "百","十","个" 的字符串
+     * @return array
+     */
+    protected abstract function loopKjh(String $bsg);
+
+
+    /**
+     * @param array $arr 数组格式[0 => int ,1 => int ,ect]
+     * @return array 原数组是号码 0-9 的个数集合,结果数组是 0-9 按个数的降序排序
+     */
+    protected abstract function desc09(array $arr);
 
 }
