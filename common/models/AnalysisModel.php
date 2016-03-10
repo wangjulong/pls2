@@ -79,9 +79,10 @@ abstract class AnalysisModel
     /**
      * 工具方法 根据整体数据,分析的期数,计算出 followTable
      * @param String $bsg 匹配 "百","十","个" 的字符串
+     * @param int $i 具体的分析号码在 $entireData 数组中的行号
      * @return array
      */
-    protected abstract function loopKjh(String $bsg);
+    protected abstract function loopKjh(String $bsg,int $i);
 
 
     /**
