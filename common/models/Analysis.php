@@ -59,8 +59,7 @@ class Analysis extends AnalysisModel
             $follow['s8'] = $temp[8];
             $follow['s9'] = $temp[9];
 
-
-            $temp= $this->loopKjh('ge', $i);
+            $temp = $this->loopKjh('ge', $i);
 
             $follow['g0'] = $temp[0];
             $follow['g1'] = $temp[1];
@@ -82,11 +81,12 @@ class Analysis extends AnalysisModel
     /**
      * @param String $bsg 选项(百位十位个位)
      * 分析的数据是开奖号码
-     * $i 开奖号码最后几期的行号(默认值: $i = 80 - 5) , $i = (75 - 79)循环
+     * @param int $i 开奖号码最后几期的行号(默认值: $i = 80 - 5) , $i = (75 - 79)循环
+     * @return array
      */
     protected function loopKjh(String $bsg, int $i)
     {
-        $temp = array(0,0,0,0,0,0,0,0,0,0);
+        $temp = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         // 循环 1-1 : $intervalLoop(1 - $interval) 间隔数
         for ($intervalLoop = 1; $intervalLoop <= $this->interval; $intervalLoop++) {
@@ -110,23 +110,10 @@ class Analysis extends AnalysisModel
         }
 
         // 原数组是号码 0-9 的个数集合,结果数组是 0-9 按个数的降序排序
-        $result = $this->desc09($temp);
+        arsort($temp);
+        $result = array_keys($temp);
         return $result;
     }
 
 
-    /**
-     * @param array $arr 数组格式[0 => int ,1 => int ,ect]
-     * @return array 原数组是号码 0-9 的个数集合,结果数组是 0-9 按个数的降序排序
-     */
-    protected function desc09(array $arr)
-    {
-        // step1 对数组 $arr 进行降序排序 (0 - 9 == keys)
-        arsort($arr);
-
-        // step2 结果数组 = $arr的键组成的数组, return
-        $result = array_keys($arr);
-
-        return $result;
-    }
 }

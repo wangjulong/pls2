@@ -82,13 +82,7 @@ abstract class AnalysisModel
      * @param int $i 具体的分析号码在 $entireData 数组中的行号
      * @return array
      */
-    protected abstract function loopKjh(String $bsg,int $i);
+    protected abstract function loopKjh(String $bsg, int $i);
 
-
-    /**
-     * @param array $arr 数组格式[0 => int ,1 => int ,ect]
-     * @return array 原数组是号码 0-9 的个数集合,结果数组是 0-9 按个数的降序排序
-     */
-    protected abstract function desc09(array $arr);
 
 }
